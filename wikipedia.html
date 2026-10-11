@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artificial Intelligence - Wikipedia</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: #202122;
+            background-color: #ffffff;
+            line-height: 1.6;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            padding: 15px 30px;
+            border-bottom: 1px solid #a7d7f9;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 45px;
+            height: 45px;
+        }
+
+        .logo-text h2 {
+            font-family: Georgia, serif;
+            font-weight: normal;
+            font-size: 24px;
+        }
+
+        .logo-text p {
+            font-family: Georgia, serif;
+            font-size: 12px;
+        }
+
+        .search {
+            margin-left: auto;
+        }
+
+        .search input {
+            padding: 9px;
+            width: 230px;
+            border: 1px solid #a2a9b1;
+            font-size: 14px;
+        }
+
+        .main {
+            display: flex;
+            gap: 35px;
+            padding: 30px;
+        }
+
+        .sidebar {
+            width: 200px;
+            flex-shrink: 0;
+            font-size: 14px;
+        }
+
+        .sidebar h3 {
+            font-size: 14px;
+            border-bottom: 1px solid #a2a9b1;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+        }
+
+        .sidebar a {
+            display: block;
+            text-decoration: none;
+            color: #0645ad;
+            padding: 4px 0;
+        }
+
+        .article {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .article h1 {
+            font-family: Georgia, serif;
+            font-size: 32px;
+            font-weight: normal;
+            border-bottom: 1px solid #a2a9b1;
+            padding-bottom: 8px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #a2a9b1;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .tabs p {
+            padding: 8px 5px;
+        }
+
+        .article a {
+            color: #0645ad;
+            text-decoration: none;
+        }
+
+        .article a:hover,
+        .sidebar a:hover {
+            text-decoration: underline;
+        }
+
+        .article p {
+            margin-bottom: 15px;
+        }
+
+        .article h2 {
+            font-family: Georgia, serif;
+            font-size: 24px;
+            font-weight: normal;
+            border-bottom: 1px solid #a2a9b1;
+            margin: 25px 0 12px;
+            padding-bottom: 5px;
+        }
+
+        .article h3 {
+            font-family: Georgia, serif;
+            font-size: 19px;
+            margin: 18px 0 8px;
+        }
+
+        .contents {
+            display: inline-block;
+            border: 1px solid #a2a9b1;
+            background-color: #f8f9fa;
+            padding: 15px 25px;
+            margin: 5px 0 20px;
+            font-size: 14px;
+        }
+
+        .contents h3 {
+            margin: 0 0 8px;
+            font-size: 16px;
+        }
+
+        .contents ol {
+            padding-left: 22px;
+        }
+
+        .info {
+            float: right;
+            width: 260px;
+            margin: 0 0 20px 20px;
+            padding: 5px;
+            border: 1px solid #a2a9b1;
+            background-color: #f8f9fa;
+            font-size: 13px;
+        }
+
+        .info h3 {
+            background-color: #eaecf0;
+            text-align: center;
+            padding: 8px;
+            margin: 0 0 8px;
+            font-size: 18px;
+        }
+
+        .info img {
+            width: 100%;
+            height: 145px;
+            object-fit: cover;
+            margin-bottom: 8px;
+        }
+
+        .info p {
+            margin: 8px 5px;
+        }
+
+        .footer {
+            border-top: 1px solid #a2a9b1;
+            margin: 30px;
+            padding: 15px 0;
+            font-size: 13px;
+            color: #54595d;
+        }
+
+        @media (max-width: 750px) {
+            .header {
+                padding: 12px;
+                flex-wrap: wrap;
+            }
+
+            .search {
+                width: 100%;
+                margin-left: 0;
+            }
+
+            .search input {
+                width: 100%;
+            }
+
+            .main {
+                padding: 15px;
+                gap: 15px;
+            }
+
+            .sidebar {
+                width: 125px;
+            }
+
+            .article h1 {
+                font-size: 27px;
+            }
+
+            .info {
+                float: none;
+                width: 100%;
+                margin: 15px 0;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .sidebar {
+                display: none;
+            }
+
+            .main {
+                padding: 12px;
+            }
+
+            .tabs {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <img
+            class="logo"
+            src="https://en.wikipedia.org/static/images/icons/wikipedia.png"
+            alt="Wikipedia logo"
+        >
+
+        <div class="logo-text">
+            <h2>Wikipedia</h2>
+            <p>The Free Encyclopedia</p>
+        </div>
+
+        <div class="search">
+            <input type="text" placeholder="Search Wikipedia">
+        </div>
+    </div>
+
+    <div class="main">
+
+        <div class="sidebar">
+            <h3>Contents</h3>
+            <a href="#introduction">Introduction</a>
+            <a href="#history">History</a>
+            <a href="#types">Types</a>
+            <a href="#applications">Applications</a>
+            <a href="#advantages">Advantages</a>
+            <a href="#challenges">Challenges</a>
+            <a href="#references">References</a>
+        </div>
+
+        <div class="article">
+
+            <h1>Artificial intelligence</h1>
+
+            <p class="subtitle">
+                From Wikipedia, the free encyclopedia
+            </p>
+
+            <div class="tabs">
+                <p>Article</p>
+                <p>Talk</p>
+                <p>Read</p>
+                <p>View source</p>
+                <p>View history</p>
+            </div>
+
+            <p>
+                <b>Artificial intelligence (AI)</b> is a field of computer
+                science focused on creating machines and software that
+                can perform tasks that normally require human intelligence.
+                These tasks include learning, reasoning, problem-solving
+                and understanding language.
+            </p>
+
+            <div class="info">
+                <h3>Artificial intelligence</h3>
+
+                <img
+                    src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600"
+                    alt="Artificial intelligence illustration"
+                >
+
+                <p><b>Field:</b> Computer science</p>
+                <p><b>First developed:</b> 20th century</p>
+                <p><b>Main areas:</b> Machine learning, robotics, language processing</p>
+                <p><b>Applications:</b> Healthcare, education, transport and research</p>
+            </div>
+
+            <div class="contents">
+                <h3>Contents</h3>
+                <ol>
+                    <li><a href="#introduction">Introduction</a></li>
+                    <li><a href="#history">History</a></li>
+                    <li><a href="#types">Types of AI</a></li>
+                    <li><a href="#applications">Applications</a></li>
+                    <li><a href="#advantages">Advantages</a></li>
+                    <li><a href="#challenges">Challenges</a></li>
+                    <li><a href="#references">References</a></li>
+                </ol>
+            </div>
+
+            <div id="introduction">
+                <h2>Introduction</h2>
+
+                <p>
+                    Artificial intelligence is used to develop systems
+                    that can analyse information, recognise patterns
+                    and make predictions. Some AI systems follow
+                    predefined rules, while others learn patterns
+                    from data.
+                </p>
+
+                <p>
+                    Modern AI includes technologies such as
+                    <a href="#types">machine learning</a>,
+                    computer vision and natural language processing.
+                    These technologies are used in many digital services.
+                </p>
+            </div>
+
+            <div id="history">
+                <h2>History</h2>
+
+                <p>
+                    The idea of intelligent machines has existed for
+                    centuries. AI became a formal field of research
+                    during the 1950s, when scientists began studying
+                    whether computers could perform tasks associated
+                    with human thinking.
+                </p>
+
+                <p>
+                    Advances in computing power, data availability
+                    and algorithms later helped AI research grow.
+                    In the 21st century, machine learning and deep
+                    learning became important areas of development.
+                </p>
+            </div>
+
+            <div id="types">
+                <h2>Types of AI</h2>
+
+                <h3>Machine learning</h3>
+
+                <p>
+                    Machine learning allows computer systems to learn
+                    patterns from data and use those patterns to make
+                    predictions or decisions.
+                </p>
+
+                <h3>Natural language processing</h3>
+
+                <p>
+                    Natural language processing helps computers
+                    analyse, understand and generate human language.
+                    It is used in translation tools and chatbots.
+                </p>
+
+                <h3>Computer vision</h3>
+
+                <p>
+                    Computer vision enables computers to interpret
+                    images and videos, such as identifying objects
+                    in a photograph.
+                </p>
+            </div>
+
+            <div id="applications">
+                <h2>Applications</h2>
+
+                <p>
+                    AI is used in healthcare to support medical
+                    research, in education to provide learning tools,
+                    and in transportation to assist navigation.
+                    It is also used by search engines, recommendation
+                    systems and digital assistants.
+                </p>
+            </div>
+
+            <div id="advantages">
+                <h2>Advantages</h2>
+
+                <p>
+                    AI can process large amounts of data quickly,
+                    automate repetitive tasks and help people identify
+                    patterns that may be difficult to notice manually.
+                    It can also support scientific research and
+                    improve certain services.
+                </p>
+            </div>
+
+            <div id="challenges">
+                <h2>Challenges</h2>
+
+                <p>
+                    AI systems can produce inaccurate results and
+                    may reflect biases present in their training data.
+                    Other concerns include privacy, security,
+                    transparency and the responsible use of automated
+                    decisions.
+                </p>
+            </div>
+
+            <div id="references">
+                <h2>References</h2>
+
+                <ol>
+                    <li>
+                        <a href="https://en.wikipedia.org/wiki/Artificial_intelligence">
+                            Artificial intelligence — Wikipedia
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.ibm.com/think/topics/artificial-intelligence">
+                            Artificial intelligence — IBM
+                        </a>
+                    </li>
+                </ol>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>
+            This page is a static educational clone created using
+            HTML and CSS. It is not an official Wikipedia page.
+        </p>
+    </div>
+
+</body>
+</html>
